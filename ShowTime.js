@@ -12,7 +12,7 @@ const ShowTime = props => {
   const fontSize = fontFit(time, width);
   return (
     <View>
-      <Text style={{ color: props.color }}>45</Text>
+      <Text style={{ color: props.color }}>47</Text>
       <Text style={{ color: props.color, fontSize: fontSize }}>{time}</Text>
     </View>
   );
