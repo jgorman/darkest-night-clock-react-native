@@ -11,7 +11,7 @@ const Clock = props => {
   return (
     <View>
       <View>
-        <Text style={{ color: "red" }}>OOPS 30</Text>
+        <Text style={{ color: "red" }}>OOPS 31</Text>
         <ShowTime
           date={clock.date}
           showSeconds={clock.showSeconds}

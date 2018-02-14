@@ -1,7 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 
-const fontRatio = 5;
+/*
+Auto scale font to fit.
+https://medium.com/@vygaio/how-to-auto-adjust-text-font-size-to-fit-into-a-nodes-width-in-react-native-9f7d1d68305b
+*/
 
 const ShowTime = props => {
   const time = formatTime(props.date, props.showSeconds);
@@ -9,7 +12,7 @@ const ShowTime = props => {
   const fontSize = fontFit(time, width);
   return (
     <View>
-      <Text style={{ color: props.color }}>44</Text>
+      <Text style={{ color: props.color }}>45</Text>
       <Text style={{ color: props.color, fontSize: fontSize }}>{time}</Text>
     </View>
   );
