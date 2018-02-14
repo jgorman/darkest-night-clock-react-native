@@ -12,8 +12,7 @@ const initialState = () => {
     date: new Date(),
     brightness: 1.0,
     color: DEFAULT_COLOR,
-    showSeconds: true,
-    // showSeconds: false,
+    showSeconds: false,
     showDate: false,
     showControls: true,
     showColors: false
