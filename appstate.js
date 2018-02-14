@@ -12,11 +12,14 @@ const initialState = () => {
     date: new Date(),
     brightness: 1.0,
     color: DEFAULT_COLOR,
-    showSeconds: false,
+    showSeconds: true,
+    // showSeconds: false,
     showDate: false,
     showControls: true,
     showColors: false
   };
+
+  return state;
 
   // Read any saved configuration values.
   const old = getOldState();
@@ -84,22 +87,5 @@ export const reducer = (state = initialState(), action) => {
 
     default:
       return state;
-  }
-};
-
-// Save state in browser storage.
-export const saveState = state => {
-  const settings = JSON.stringify(state);
-  localStorage.setItem("clock-settings", settings);
-};
-
-// Get state from browser storage.
-const getOldState = () => {
-  try {
-    const settings = localStorage.getItem("clock-settings");
-    return JSON.parse(settings);
-  } catch (err) {
-    console.error("getOldState:", err.message);
-    return null;
   }
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { zeropad } from "./utils";
 
 /*
 Auto scale font to fit.
@@ -32,12 +33,6 @@ const ShowDate = props => {
 const fontFit = (str, width, fill = 1.0) => {
   const fontScale = 1.9; // Font size / char width pixels.
   return width / str.length * fontScale * fill;
-};
-
-const zeropad = (num, len) => {
-  const str = num.toString();
-  if (str.length >= len) return str;
-  return "0".repeat(len - str.length) + str;
 };
 
 const formatTime = (date, showSeconds) => {
