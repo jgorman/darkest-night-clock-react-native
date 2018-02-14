@@ -3,14 +3,21 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { ShowTime, ShowDate } from "./ShowTime";
 
 const Clock = props => {
-  const date = new Date();
-  const color = "#00f";
+  const clock = {
+    date: new Date(),
+    color: "#ff0000",
+    showSeconds: false
+  };
   return (
     <View>
       <View>
-        <Text style={{color: "red"}}>OOPS 26</Text>
-        <ShowTime date={date} color={color} />
-        <ShowDate date={date} showSeconds={true} color={color} />
+        <Text style={{ color: "red" }}>OOPS 30</Text>
+        <ShowTime
+          date={clock.date}
+          showSeconds={clock.showSeconds}
+          color={clock.color}
+        />
+        <ShowDate date={clock.date} color={clock.color} />
       </View>
 
       <View style={{ flexDirection: "row" }}>

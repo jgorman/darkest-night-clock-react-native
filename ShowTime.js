@@ -1,26 +1,40 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+
+const fontRatio = 5;
 
 const ShowTime = props => {
+  const time = formatTime(props.date, props.showSeconds);
+  const { width } = Dimensions.get("window");
+  const fontSize = fontFit(time, width);
   return (
     <View>
-      <Text style={{color: props.color}}>18</Text>
-      <Text style={{color: props.color}}>{formatTime(new Date(), true)}</Text>
+      <Text style={{ color: props.color }}>44</Text>
+      <Text style={{ color: props.color, fontSize: fontSize }}>{time}</Text>
     </View>
   );
 };
 
 const ShowDate = props => {
+  const date = formatDate(props.date);
+  const { width } = Dimensions.get("window");
+  const fontSize = fontFit(date, width, 0.6);
   return (
     <View>
-      <Text style={{color: "red"}}>{formatDate(new Date())}</Text>
+      <Text style={{ color: props.color, fontSize: fontSize }}>{date}</Text>
     </View>
   );
 };
 
+const fontFit = (str, width, fill = 1.0) => {
+  const fontScale = 1.9; // Font size / char width pixels.
+  return width / str.length * fontScale * fill;
+};
+
 const zeropad = (num, len) => {
   const str = num.toString();
-  return str.padStart(len, "0");
+  if (str.length >= len) return str;
+  return "0".repeat(len - str.length) + str;
 };
 
 const formatTime = (date, showSeconds) => {
@@ -42,24 +56,5 @@ const formatDate = date => {
   const month2 = zeropad(month, 2);
   return `${year}-${month2}-${day2}`;
 };
-
-// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
-if (!String.prototype.padStart) {
-    String.prototype.padStart = function padStart(targetLength,padString) {
-        targetLength = targetLength>>0; //truncate if number or convert non-number to 0;
-        padString = String((typeof padString !== 'undefined' ? padString : ' '));
-        if (this.length > targetLength) {
-            return String(this);
-        }
-        else {
-            targetLength = targetLength-this.length;
-            if (targetLength > padString.length) {
-                padString += padString.repeat(targetLength/padString.length); //append to original to ensure we are longer than needed
-            }
-            return padString.slice(0,targetLength) + String(this);
-        }
-    };
-}
 
 export { ShowTime, ShowDate };
