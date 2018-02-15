@@ -59,27 +59,24 @@ class Clock extends Component {
     const color = formatColor(scaleColor(clock.color, clock.brightness));
 
     return (
-      <View>
-        <View>
-          <Text style={{ color: "red" }}>OOPS 51</Text>
-          <ShowTime
-            date={clock.date}
-            showSeconds={clock.showSeconds}
-            color={color}
-          />
-          {clock.showDate ? (
-            <ShowDate date={clock.date} color={color} />
-          ) : (
-            undefined
-          )}
-        </View>
+      <View style={{alignItems: "center"}}>
+        <Text style={{ color: "red" }}>OOPS 62</Text>
 
-        <View style={{flexDirection: "column"}}>
-        <View>
-          {clock.showColors ? <Colors click={this.setColorClick} /> : undefined}
-        </View>
+        <ShowTime
+          date={clock.date}
+          showSeconds={clock.showSeconds}
+          color={color}
+        />
+
+        {clock.showDate ? (
+          <ShowDate date={clock.date} color={color} />
+        ) : (
+          undefined
+        )}
+
+        {clock.showColors ? <Colors click={this.setColorClick} /> : undefined}
+
         <View style={{ flexDirection: "row" }}>
-          {clock.showColors ? <Colors click={this.setColorClick} /> : undefined}
           <TouchableHighlight onPress={this.brighterClick}>
             <Image source={require("./plus-circle.png")} />
           </TouchableHighlight>
@@ -95,7 +92,6 @@ class Clock extends Component {
           <TouchableHighlight onPress={this.showDateClick}>
             <Image source={require("./show-date.png")} />
           </TouchableHighlight>
-        </View>
         </View>
       </View>
     );

@@ -12,7 +12,6 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <Text style={styles.text}>Version 05</Text>
           <Clock />
         </View>
       </Provider>
@@ -24,8 +23,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   text: {
     color: "red"

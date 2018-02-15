@@ -13,12 +13,11 @@ const Color = props => {
   const color = formatColor(props.color);
   return (
     <TouchableHighlight
-      onClick={() => {
+      onPress={() => {
         props.click(props.color);
       }}
     >
-      {/* <View style={{ backgroundColor: color, width: 30, height: 40 }} /> */}
-      <Image source={require("./plus-circle.png")} />
+      <View style={{ backgroundColor: color, width: 30, height: 30 }} />
     </TouchableHighlight>
   );
 };
@@ -26,13 +25,12 @@ const Color = props => {
 const Colors = props => {
   const click = props.click;
   return (
-    <View style={{flexDirection: "row"}}>
+    <View style={{ flexDirection: "row" }}>
       <Color click={click} color={0xff0000} />
       <Color click={click} color={0x00ff00} />
       <Color click={click} color={0x0000ff} />
       <Color click={click} color={0xff00ff} />
       <Color click={click} color={0xffff00} />
-      <Color click={click} color={0xffffff} />
       <Color click={click} color={0xffffff} />
     </View>
   );

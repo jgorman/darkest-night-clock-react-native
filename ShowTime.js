@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { Text, Dimensions } from "react-native";
 import { zeropad } from "./utils";
 
 /*
-Auto scale font to fit.
+Auto scale font to fit using undocumented features.
 https://medium.com/@vygaio/how-to-auto-adjust-text-font-size-to-fit-into-a-nodes-width-in-react-native-9f7d1d68305b
 */
 
@@ -11,11 +11,14 @@ const ShowTime = props => {
   const time = formatTime(props.date, props.showSeconds);
   const { width } = Dimensions.get("window");
   const fontSize = fontFit(time, width);
+  const lineHeight = fontSize;
+  console.log("fontSize", fontSize, "lineHeight", lineHeight);
   return (
-    <View>
-      <Text style={{ color: props.color }}>47</Text>
-      <Text style={{ color: props.color, fontSize: fontSize }}>{time}</Text>
-    </View>
+    <Text
+      style={{ color: props.color, fontSize: fontSize, lineHeight: fontSize }}
+    >
+      {time}
+    </Text>
   );
 };
 
@@ -24,9 +27,11 @@ const ShowDate = props => {
   const { width } = Dimensions.get("window");
   const fontSize = fontFit(date, width, 0.6);
   return (
-    <View>
-      <Text style={{ color: props.color, fontSize: fontSize }}>{date}</Text>
-    </View>
+    <Text
+      style={{ color: props.color, fontSize: fontSize, lineHeight: fontSize }}
+    >
+      {date}
+    </Text>
   );
 };
 
@@ -40,8 +45,6 @@ const formatTime = (date, showSeconds) => {
   str += ":" + zeropad(date.getMinutes(), 2);
   if (showSeconds) {
     str += ":" + zeropad(date.getSeconds(), 2);
-    // Eventually debug the shifting time. Perhaps a fixed font?
-    // str += ":" + (((date.getSeconds() % 2) === 1) ? "11" : "00");
   }
   return str;
 };
