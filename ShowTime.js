@@ -11,8 +11,6 @@ const ShowTime = props => {
   const time = formatTime(props.date, props.showSeconds);
   const { width } = Dimensions.get("window");
   const fontSize = fontFit(time, width);
-  const lineHeight = fontSize;
-  console.log("fontSize", fontSize, "lineHeight", lineHeight);
   return (
     <Text
       style={{ color: props.color, fontSize: fontSize, lineHeight: fontSize }}

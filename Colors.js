@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableHighlight
-} from "react-native";
+import { View, TouchableHighlight } from "react-native";
 
 import { formatColor } from "./utils";
 

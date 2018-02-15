@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableHighlight
-} from "react-native";
+import { Text, View, Image, TouchableHighlight } from "react-native";
 import { connect } from "react-redux";
 
 import { ShowTime, ShowDate } from "./ShowTime";
@@ -59,40 +53,54 @@ class Clock extends Component {
     const color = formatColor(scaleColor(clock.color, clock.brightness));
 
     return (
-      <View style={{alignItems: "center"}}>
-        <Text style={{ color: "red" }}>OOPS 62</Text>
+      <View style={{ alignItems: "center" }}>
+        <TouchableHighlight onPress={this.showControlsClick}>
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ color: "red" }}>OOPS 69</Text>
 
-        <ShowTime
-          date={clock.date}
-          showSeconds={clock.showSeconds}
-          color={color}
-        />
+            <ShowTime
+              date={clock.date}
+              showSeconds={clock.showSeconds}
+              color={color}
+            />
 
-        {clock.showDate ? (
-          <ShowDate date={clock.date} color={color} />
+            {clock.showDate ? (
+              <ShowDate date={clock.date} color={color} />
+            ) : (
+              undefined
+            )}
+          </View>
+        </TouchableHighlight>
+
+        {clock.showControls ? (
+          <View style={{ alignItems: "center" }}>
+            {clock.showColors ? (
+              <Colors click={this.setColorClick} />
+            ) : (
+              undefined
+            )}
+
+            <View style={{ flexDirection: "row" }}>
+              <TouchableHighlight onPress={this.brighterClick}>
+                <Image source={require("./plus-circle.png")} />
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.dimmerClick}>
+                <Image source={require("./minus-circle.png")} />
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.showColorClick}>
+                <Image source={require("./colors.png")} />
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.showSecondsClick}>
+                <Image source={require("./seconds.png")} />
+              </TouchableHighlight>
+              <TouchableHighlight onPress={this.showDateClick}>
+                <Image source={require("./show-date.png")} />
+              </TouchableHighlight>
+            </View>
+          </View>
         ) : (
           undefined
         )}
-
-        {clock.showColors ? <Colors click={this.setColorClick} /> : undefined}
-
-        <View style={{ flexDirection: "row" }}>
-          <TouchableHighlight onPress={this.brighterClick}>
-            <Image source={require("./plus-circle.png")} />
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this.dimmerClick}>
-            <Image source={require("./minus-circle.png")} />
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this.showColorClick}>
-            <Image source={require("./colors.png")} />
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this.showSecondsClick}>
-            <Image source={require("./seconds.png")} />
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this.showDateClick}>
-            <Image source={require("./show-date.png")} />
-          </TouchableHighlight>
-        </View>
       </View>
     );
   }
