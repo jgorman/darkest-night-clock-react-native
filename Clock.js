@@ -60,7 +60,7 @@ class Clock extends Component {
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "red" }}>OOPS 82</Text>
+            <Text style={{ color: "red" }}>Version 93</Text>
 
             <ShowTime
               date={clock.date}
@@ -87,27 +87,27 @@ class Clock extends Component {
             <View style={{ flexDirection: "row" }}>
               <TouchableHighlight onPress={this.brighterClick}>
                 <View style={button}>
-                  <Image source={require("./plus-circle.png")} />
+                  <Image source={require("./images/plus-circle.png")} />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.dimmerClick}>
                 <View style={button}>
-                  <Image source={require("./minus-circle.png")} />
+                  <Image source={require("./images/minus-circle.png")} />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.showColorClick}>
                 <View style={button}>
-                  <Image source={require("./colors.png")} />
+                  <Image source={require("./images/colors.png")} />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.showSecondsClick}>
                 <View style={button}>
-                  <Image source={require("./seconds.png")} />
+                  <Image source={require("./images/seconds.png")} />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.showDateClick}>
                 <View style={button}>
-                  <Image source={require("./show-date.png")} />
+                  <Image source={require("./images/show-date.png")} />
                 </View>
               </TouchableHighlight>
             </View>
