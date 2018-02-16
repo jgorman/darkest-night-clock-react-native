@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/clock.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#111111"
     },
     "ios": {
       "supportsTablet": true
