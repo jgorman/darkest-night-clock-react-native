@@ -17,7 +17,6 @@ class Clock extends Component {
 
   tick = () => {
     this.props.dispatch({ type: "SET_DATE", date: new Date() });
-    // jj saveState(this.props.clock);
   };
 
   brighterClick = () => {
@@ -61,7 +60,7 @@ class Clock extends Component {
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "red" }}>OOPS 74</Text>
+            <Text style={{ color: "red" }}>OOPS 82</Text>
 
             <ShowTime
               date={clock.date}
