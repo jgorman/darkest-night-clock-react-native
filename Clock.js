@@ -50,9 +50,10 @@ class Clock extends Component {
   render() {
     const clock = this.props.clock;
     const color = formatColor(scaleColor(clock.color, clock.brightness));
-    const button = {
-      borderRightWidth: 5,
-      borderLeftWidth: 5
+    const image = {
+      height: 60,
+      width: 60,
+      margin: 5
     };
     // svgexport colors.svg colors.png 40:40
 
@@ -60,7 +61,7 @@ class Clock extends Component {
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "red" }}>Version 93</Text>
+            <Text style={{ color: "red" }}>Version 98</Text>
 
             <ShowTime
               date={clock.date}
@@ -86,28 +87,43 @@ class Clock extends Component {
 
             <View style={{ flexDirection: "row" }}>
               <TouchableHighlight onPress={this.brighterClick}>
-                <View style={button}>
-                  <Image source={require("./images/plus-circle.png")} />
+                <View>
+                  <Image
+                    style={image}
+                    source={require("./images/plus-circle.png")}
+                  />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.dimmerClick}>
-                <View style={button}>
-                  <Image source={require("./images/minus-circle.png")} />
+                <View>
+                  <Image
+                    style={image}
+                    source={require("./images/minus-circle.png")}
+                  />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.showColorClick}>
-                <View style={button}>
-                  <Image source={require("./images/colors.png")} />
+                <View>
+                  <Image
+                    style={image}
+                    source={require("./images/colors.png")}
+                  />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.showSecondsClick}>
-                <View style={button}>
-                  <Image source={require("./images/seconds.png")} />
+                <View>
+                  <Image
+                    style={image}
+                    source={require("./images/seconds.png")}
+                  />
                 </View>
               </TouchableHighlight>
               <TouchableHighlight onPress={this.showDateClick}>
-                <View style={button}>
-                  <Image source={require("./images/show-date.png")} />
+                <View>
+                  <Image
+                    style={image}
+                    source={require("./images/show-date.png")}
+                  />
                 </View>
               </TouchableHighlight>
             </View>

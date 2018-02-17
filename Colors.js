@@ -11,7 +11,7 @@ const Color = props => {
         props.click(props.color);
       }}
     >
-      <View style={{ backgroundColor: color, width: 30, height: 30 }} />
+      <View style={{ backgroundColor: color, width: 60, height: 60, margin: 5 }} />
     </TouchableHighlight>
   );
 };
@@ -21,9 +21,8 @@ const Colors = props => {
   return (
     <View style={{ flexDirection: "row" }}>
       <Color click={click} color={0xff0000} />
-      <Color click={click} color={0x00ff00} />
-      <Color click={click} color={0x0000ff} />
       <Color click={click} color={0xff00ff} />
+      <Color click={click} color={0x0000ff} />
       <Color click={click} color={0xffff00} />
       <Color click={click} color={0xffffff} />
     </View>
