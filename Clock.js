@@ -55,14 +55,11 @@ class Clock extends Component {
       width: 60,
       margin: 5
     };
-    // svgexport colors.svg colors.png 40:40
 
     return (
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "red" }}>Version 99</Text>
-
             <ShowTime
               date={clock.date}
               showSeconds={clock.showSeconds}

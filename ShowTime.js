@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Dimensions } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { zeropad } from "./utils";
 
 /*
@@ -11,12 +11,19 @@ const ShowTime = props => {
   const time = formatTime(props.date, props.showSeconds);
   const { width } = Dimensions.get("window");
   const fontSize = fontFit(time, width);
+  const box = {
+    height: fontSize * 0.85,
+    justifyContent: "center"
+  };
+  const text = {
+    color: props.color,
+    fontSize: fontSize
+  };
+
   return (
-    <Text
-      style={{ color: props.color, fontSize: fontSize, lineHeight: fontSize }}
-    >
-      {time}
-    </Text>
+    <View style={box}>
+      <Text style={text}>{time}</Text>
+    </View>
   );
 };
 
@@ -24,17 +31,23 @@ const ShowDate = props => {
   const date = formatDate(props.date);
   const { width } = Dimensions.get("window");
   const fontSize = fontFit(date, width, 0.6);
+  const box = {
+    height: fontSize * 0.85,
+    justifyContent: "center"
+  };
+  const text = {
+    color: props.color,
+    fontSize: fontSize
+  };
   return (
-    <Text
-      style={{ color: props.color, fontSize: fontSize, lineHeight: fontSize }}
-    >
-      {date}
-    </Text>
+    <View style={box}>
+      <Text style={text}>{date}</Text>
+    </View>
   );
 };
 
 const fontFit = (str, width, fill = 1.0) => {
-  const fontScale = 1.9; // Font size / char width pixels.
+  const fontScale = 1.8; // Font size / char width pixels.
   return width / str.length * fontScale * fill;
 };
 
