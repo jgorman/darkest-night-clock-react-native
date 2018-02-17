@@ -87,7 +87,7 @@ class Clock extends Component {
                 <View>
                   <Image
                     style={image}
-                    source={require("./images/plus-circle.png")}
+                    source={require("./assets/plus-circle.png")}
                   />
                 </View>
               </TouchableHighlight>
@@ -95,7 +95,7 @@ class Clock extends Component {
                 <View>
                   <Image
                     style={image}
-                    source={require("./images/minus-circle.png")}
+                    source={require("./assets/minus-circle.png")}
                   />
                 </View>
               </TouchableHighlight>
@@ -103,7 +103,7 @@ class Clock extends Component {
                 <View>
                   <Image
                     style={image}
-                    source={require("./images/colors.png")}
+                    source={require("./assets/colors.png")}
                   />
                 </View>
               </TouchableHighlight>
@@ -111,7 +111,7 @@ class Clock extends Component {
                 <View>
                   <Image
                     style={image}
-                    source={require("./images/seconds.png")}
+                    source={require("./assets/seconds.png")}
                   />
                 </View>
               </TouchableHighlight>
@@ -119,7 +119,7 @@ class Clock extends Component {
                 <View>
                   <Image
                     style={image}
-                    source={require("./images/show-date.png")}
+                    source={require("./assets/show-date.png")}
                   />
                 </View>
               </TouchableHighlight>

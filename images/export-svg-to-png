@@ -3,10 +3,10 @@
 splash=192:192
 button=100:100
 
-svgexport clock.svg ../assets/clock.png $splash
+svgexport clock.svg         ../assets/clock.png         $splash
 
-svgexport colors.svg colors.png $button
-svgexport minus-circle.svg minus-circle.png $button
-svgexport plus-circle.svg plus-circle.png $button
-svgexport seconds.svg seconds.png $button
-svgexport show-date.svg show-date.png $button
+svgexport colors.svg        ../assets/colors.png        $button
+svgexport minus-circle.svg  ../assets/minus-circle.png  $button
+svgexport plus-circle.svg   ../assets/plus-circle.png   $button
+svgexport seconds.svg       ../assets/seconds.png       $button
+svgexport show-date.svg     ../assets/show-date.png     $button
