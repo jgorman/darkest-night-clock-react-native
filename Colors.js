@@ -11,7 +11,9 @@ const Color = props => {
         props.click(props.color);
       }}
     >
-      <View style={{ backgroundColor: color, width: 60, height: 60, margin: 5 }} />
+      <View
+        style={{ backgroundColor: color, width: 60, height: 60, margin: 5 }}
+      />
     </TouchableHighlight>
   );
 };

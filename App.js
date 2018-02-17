@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { KeepAwake } from "expo";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { reducer } from "./appstate";
@@ -9,7 +10,6 @@ import Clock from "./Clock";
 const store = createStore(reducer);
 
 export default class App extends React.Component {
-
   componentDidMount = () => {
     getOldState(oldState => {
       store.dispatch({ type: "REDUX_STORAGE_LOAD", oldState: oldState });
@@ -27,6 +27,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <KeepAwake />
           <Clock />
         </View>
       </Provider>

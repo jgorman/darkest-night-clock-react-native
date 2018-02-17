@@ -8,10 +8,8 @@ const settingsKey = "clockSettings";
 export const saveState = state => {
   const settings = JSON.stringify(state);
   AsyncStorage.setItem(settingsKey, settings)
-    .then(() => {
-    })
-    .catch(err => {
-    });
+    .then(() => {})
+    .catch(err => {});
 };
 
 // Get state from browser storage.
@@ -21,6 +19,5 @@ export const getOldState = success => {
     .then(settings => {
       success(settings);
     })
-    .catch(err => {
-    });
+    .catch(err => {});
 };

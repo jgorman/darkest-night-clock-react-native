@@ -61,7 +61,7 @@ class Clock extends Component {
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            <Text style={{ color: "red" }}>Version 98</Text>
+            <Text style={{ color: "red" }}>Version 99</Text>
 
             <ShowTime
               date={clock.date}
