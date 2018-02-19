@@ -1,12 +1,10 @@
-# npm install -g svgexport
+# brew install batik
 
-splash=192:192
-button=100:100
+# https://docs.expo.io/versions/latest/guides/configuration.html#icon
 
-svgexport clock.svg         ../assets/clock.png         $splash
+batik-rasterizer -dpi 2048 -h 1024 -w 1024 clock.svg \
+  -d ../assets/clock-1024x1024.png
 
-svgexport colors.svg        ../assets/colors.png        $button
-svgexport minus-circle.svg  ../assets/minus-circle.png  $button
-svgexport plus-circle.svg   ../assets/plus-circle.png   $button
-svgexport seconds.svg       ../assets/seconds.png       $button
-svgexport show-date.svg     ../assets/show-date.png     $button
+for f in colors minus-circle plus-circle seconds show-date; do
+  batik-rasterizer -dpi 2048 -h 100 -w 100 $f.svg -d ../assets/$f.png
+done
