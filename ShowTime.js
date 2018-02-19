@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Dimensions } from "react-native";
+import PropTypes from "prop-types";
 import { zeropad } from "./utils";
 
 /*
@@ -27,6 +28,12 @@ const ShowTime = props => {
   );
 };
 
+ShowTime.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  color: PropTypes.string.isRequired,
+  showSeconds: PropTypes.bool.isRequired
+};
+
 const ShowDate = props => {
   const date = formatDate(props.date);
   const { width } = Dimensions.get("window");
@@ -46,8 +53,13 @@ const ShowDate = props => {
   );
 };
 
+ShowDate.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  color: PropTypes.string.isRequired
+};
+
 const fontFit = (str, width, fill = 1.0) => {
-  const fontScale = 1.8; // Font size / char width pixels.
+  const fontScale = 1.8; // 1.9 is too big for iPhone 5s.
   return width / str.length * fontScale * fill;
 };
 

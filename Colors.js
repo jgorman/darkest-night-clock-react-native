@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TouchableHighlight } from "react-native";
-
+import PropTypes from "prop-types";
 import { formatColor } from "./utils";
 
 const Color = props => {
@@ -18,6 +18,11 @@ const Color = props => {
   );
 };
 
+Color.propTypes = {
+  color: PropTypes.number.isRequired,
+  click: PropTypes.func.isRequired
+};
+
 const Colors = props => {
   const click = props.click;
   return (
@@ -29,6 +34,10 @@ const Colors = props => {
       <Color click={click} color={0xffffff} />
     </View>
   );
+};
+
+Colors.propTypes = {
+  click: PropTypes.func.isRequired
 };
 
 export default Colors;
