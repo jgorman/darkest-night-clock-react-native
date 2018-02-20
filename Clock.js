@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, Image, TouchableHighlight } from "react-native";
+import { StatusBar } from 'react-native';
 import { connect } from "react-redux";
 
 import { ShowTime, ShowDate } from "./ShowTime";
@@ -9,6 +10,7 @@ import { formatColor, scaleColor } from "./utils";
 class Clock extends Component {
   componentDidMount = () => {
     this.timerID = setInterval(() => this.tick(), 1000);
+    StatusBar.setHidden(true);
   };
 
   componentWillUnmount = () => {
