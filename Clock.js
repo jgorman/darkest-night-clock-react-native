@@ -1,13 +1,25 @@
+// @flow
 import React, { Component } from "react";
+// $FlowFixMe
 import { View, Image, TouchableHighlight } from "react-native";
+// $FlowFixMe
 import { StatusBar } from "react-native";
+// $FlowFixMe
 import { connect } from "react-redux";
 
 import { ShowTime, ShowDate } from "./ShowTime";
 import Colors from "./Colors";
 import { formatColor, scaleColor } from "./utils";
+import type { ClockState } from "./utils";
 
-class Clock extends Component {
+type ClockType = {
+  dispatch: Function,
+  clock: ClockState
+};
+
+class Clock extends Component<ClockType> {
+  timerID: IntervalID;
+
   componentDidMount = () => {
     this.timerID = setInterval(() => this.tick(), 1000);
     StatusBar.setHidden(true);

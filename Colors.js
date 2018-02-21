@@ -1,5 +1,8 @@
+// @flow
 import React from "react";
+// $FlowFixMe
 import { View, TouchableHighlight } from "react-native";
+// $FlowFixMe
 import PropTypes from "prop-types";
 import { formatColor } from "./utils";
 
@@ -23,7 +26,7 @@ Color.propTypes = {
   click: PropTypes.func.isRequired
 };
 
-const Colors = props => {
+const Colors = (props: { click: Function }) => {
   const click = props.click;
   return (
     <View style={{ flexDirection: "row" }}>
