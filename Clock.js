@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Text, View, Image, TouchableHighlight } from "react-native";
-import { StatusBar } from 'react-native';
+import { View, Image, TouchableHighlight } from "react-native";
+import { StatusBar } from "react-native";
 import { connect } from "react-redux";
 
 import { ShowTime, ShowDate } from "./ShowTime";

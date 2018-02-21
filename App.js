@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { KeepAwake } from "expo";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
