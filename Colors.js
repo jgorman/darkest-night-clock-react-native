@@ -6,7 +6,12 @@ import { View, TouchableHighlight } from "react-native";
 import PropTypes from "prop-types";
 import { formatColor } from "./utils";
 
-const Color = props => {
+type ColorType = {
+  color: number,
+  click: Function
+};
+
+const Color = (props: ColorType) => {
   const color = formatColor(props.color);
   return (
     <TouchableHighlight
