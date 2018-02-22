@@ -3,9 +3,9 @@ import { StyleSheet, View } from "react-native";
 import { KeepAwake } from "expo";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { reducer } from "./appstate";
-import { getOldState } from "./platform";
-import Clock from "./Clock";
+import { reducer } from "./src/appstate";
+import { getOldState } from "./src/platform";
+import Clock from "./src/Clock";
 
 const store = createStore(reducer);
 
