@@ -1,9 +1,7 @@
 // @flow
 import React, { Component } from "react";
 // $FlowFixMe
-import { View, Image, TouchableHighlight } from "react-native";
-// $FlowFixMe
-import { StatusBar } from "react-native";
+import { View, Image, TouchableHighlight, StatusBar } from "react-native";
 // $FlowFixMe
 import { connect } from "react-redux";
 
