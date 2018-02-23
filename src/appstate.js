@@ -2,29 +2,52 @@
 /* Clock App State Management. */
 
 import { saveState } from "./platform";
-import type { ClockState } from "./utils";
 
-const MIN_BRIGHTNESS = 0.05;
-const MAX_BRIGHTNESS = 1.0;
-const DIMMER_RATIO = 0.666;
-const DEFAULT_COLOR = 0x0000ff;
+export const MIN_BRIGHTNESS = 0.05;
+export const MAX_BRIGHTNESS = 1.0;
+export const DEFAULT_COLOR = 0x0000ff;
+export const DIMMER_RATIO = 0.666;
+export const MESSAGE_DWELL = 2000;
 
-// App startup state from defaults and local browser storage.
+export const TOGGLE_SECONDS = "TOGGLE_SECONDS";
+export const TOGGLE_DATE = "TOGGLE_DATE";
+export const TOGGLE_CONTROLS = "TOGGLE_CONTROLS";
+export const TOGGLE_COLORS = "TOGGLE_COLORS";
+export const SET_DATE = "SET_DATE";
+export const SET_BRIGHTNESS = "SET_BRIGHTNESS";
+export const SET_COLOR = "SET_COLOR";
+export const SHOW_MESSAGE = "SHOW_MESSAGE";
+export const HIDE_MESSAGE = "HIDE_MESSAGE";
+export const REDUX_STORAGE_LOAD = "REDUX_STORAGE_LOAD";
+export const REDUX_STORAGE_SAVE = "REDUX_STORAGE_SAVE";
+
+export type ClockState = {
+  date: Date,
+  brightness: number,
+  color: number,
+  showSeconds: boolean,
+  showDate: boolean,
+  showControls: boolean,
+  showColors?: boolean,
+  unsavedState?: boolean,
+  userMessage?: string,
+  userMessageTimeoutID?: TimeoutID
+};
+
+// App startup state.
 const initialState = (): ClockState => {
-  // App defaults.
   const state = {
     date: new Date(),
-    brightness: 1.0,
+    brightness: MAX_BRIGHTNESS,
     color: DEFAULT_COLOR,
     showSeconds: false,
     showDate: false,
-    showControls: true,
-    showColors: false
+    showControls: true
   };
-
   return state;
 };
 
+// Merge saved state, being careful to not crash or insert unacceptable values.
 const mergeOldState = (
   state: ClockState | Object,
   old: ClockState
@@ -65,51 +88,67 @@ const mergeOldState = (
 type ActionType = {
   type: string,
   date: Date,
-  oldState: ClockState
+  brightness: number,
+  color: number,
+  oldState: ClockState,
+  userMessage: string,
+  userMessageTimeoutID: TimeoutID
 };
 
 export const reducer = (
   state: ClockState = initialState(),
   action: ActionType
 ) => {
-  let new_brightness;
   switch (action.type) {
-    case "TOGGLE_CONTROLS":
+    case TOGGLE_SECONDS:
+      return { ...state, showSeconds: !state.showSeconds, unsavedState: true };
+    case TOGGLE_DATE:
+      return { ...state, showDate: !state.showDate, unsavedState: true };
+
+    case TOGGLE_CONTROLS:
       return {
         ...state,
         showControls: !state.showControls,
         showColors: false,
-        dirty: true
+        unsavedState: true
       };
-    case "TOGGLE_COLORS":
+    case TOGGLE_COLORS:
       return { ...state, showColors: !state.showColors };
-    case "TOGGLE_SECONDS":
-      return { ...state, showSeconds: !state.showSeconds, dirty: true };
-    case "TOGGLE_DATE":
-      return { ...state, showDate: !state.showDate, dirty: true };
-    case "DIMMER":
-      new_brightness = state.brightness * DIMMER_RATIO;
-      if (new_brightness < MIN_BRIGHTNESS) new_brightness = MIN_BRIGHTNESS;
-      return { ...state, brightness: new_brightness, dirty: true };
-    case "BRIGHTER":
-      new_brightness = state.brightness / DIMMER_RATIO;
-      if (new_brightness > MAX_BRIGHTNESS) new_brightness = MAX_BRIGHTNESS;
-      return { ...state, brightness: new_brightness, dirty: true };
-    case "SET_COLOR":
+
+    case SET_DATE:
+      return { ...state, date: action.date };
+    case SET_BRIGHTNESS:
+      return {
+        ...state,
+        brightness: action.brightness,
+        unsavedState: true
+      };
+    case SET_COLOR:
       return {
         ...state,
         color: action.color || DEFAULT_COLOR,
-        brightness: 1,
+        brightness: MAX_BRIGHTNESS,
         showColors: false,
-        dirty: true
+        unsavedState: true
       };
-    case "SET_DATE":
-      return { ...state, date: action.date };
-    case "REDUX_STORAGE_LOAD":
+
+    case SHOW_MESSAGE:
+      return {
+        ...state,
+        userMessage: action.userMessage,
+        userMessageTimeoutID: action.userMessageTimeoutID
+      };
+    case HIDE_MESSAGE:
+      return {
+        ...state,
+        userMessageTimeoutID: undefined
+      };
+
+    case REDUX_STORAGE_LOAD:
       return mergeOldState(state, action.oldState);
-    case "REDUX_STORAGE_SAVE":
+    case REDUX_STORAGE_SAVE:
       saveState(mergeOldState({}, state));
-      return { ...state, dirty: false };
+      return { ...state, unsavedState: false };
 
     default:
       return state;

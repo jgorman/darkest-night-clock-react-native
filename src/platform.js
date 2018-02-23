@@ -3,7 +3,7 @@
 
 // $FlowFixMe
 import { AsyncStorage } from "react-native";
-import type { ClockState } from "./utils";
+import type { ClockState } from "./appstate";
 
 const settingsKey = "clockSettings";
 
