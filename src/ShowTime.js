@@ -18,8 +18,8 @@ type ShowTimeType = {
 };
 
 export const ShowTime = (props: ShowTimeType) => {
-  const time = formatTime(props.date, props.showSeconds);
   const { width } = Dimensions.get("window");
+  const time = formatTime(props.date, props.showSeconds);
   const fontSize = fontFit(time, width);
   const box = {
     height: fontSize * 0.85,

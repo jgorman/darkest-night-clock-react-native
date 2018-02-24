@@ -13,15 +13,17 @@ type ColorType = {
 
 const Color = (props: ColorType) => {
   const color = formatColor(props.color);
+
+  const paintChip = {
+    width: 60,
+    height: 60,
+    margin: 5,
+    backgroundColor: color
+  };
+
   return (
-    <TouchableHighlight
-      onPress={() => {
-        props.click(props.color);
-      }}
-    >
-      <View
-        style={{ backgroundColor: color, width: 60, height: 60, margin: 5 }}
-      />
+    <TouchableHighlight onPress={() => props.click(props.color)}>
+      <View style={paintChip} />
     </TouchableHighlight>
   );
 };

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { ShowTime, ShowDate } from "./ShowTime";
 import { Colors } from "./Colors";
 import { formatColor, scaleColor } from "./utils";
+
 import type { ClockState } from "./appstate";
 
 import {
@@ -115,10 +116,15 @@ class Clock extends Component<ClockType> {
     this.props.dispatch({ type: TOGGLE_DATE });
   };
 
+  showVersionPress = () => {
+    this.showMessage("Build version 2018-02-23 18:45:10");
+  };
+
   render() {
     const clock = this.props.clock;
     const color = formatColor(scaleColor(clock.color, clock.brightness));
-    const image = {
+
+    const control = {
       height: 60,
       width: 60,
       margin: 5
@@ -126,7 +132,10 @@ class Clock extends Component<ClockType> {
 
     return (
       <View style={{ alignItems: "center" }}>
-        <TouchableHighlight onPress={this.showControlsClick}>
+        <TouchableHighlight
+          onPress={this.showControlsClick}
+          onLongPress={this.showVersionPress}
+        >
           <View style={{ alignItems: "center" }}>
             {clock.userMessage && clock.userMessageTimeoutID ? (
               <Text style={{ color: "white" }}>{clock.userMessage}</Text>
@@ -160,7 +169,7 @@ class Clock extends Component<ClockType> {
               <TouchableHighlight onPress={this.brighterClick}>
                 <View>
                   <Image
-                    style={image}
+                    style={control}
                     source={require("../assets/plus-circle.png")}
                   />
                 </View>
@@ -169,7 +178,7 @@ class Clock extends Component<ClockType> {
               <TouchableHighlight onPress={this.dimmerClick}>
                 <View>
                   <Image
-                    style={image}
+                    style={control}
                     source={require("../assets/minus-circle.png")}
                   />
                 </View>
@@ -178,7 +187,7 @@ class Clock extends Component<ClockType> {
               <TouchableHighlight onPress={this.showColorClick}>
                 <View>
                   <Image
-                    style={image}
+                    style={control}
                     source={require("../assets/colors.png")}
                   />
                 </View>
@@ -187,7 +196,7 @@ class Clock extends Component<ClockType> {
               <TouchableHighlight onPress={this.showSecondsClick}>
                 <View>
                   <Image
-                    style={image}
+                    style={control}
                     source={require("../assets/seconds.png")}
                   />
                 </View>
@@ -196,7 +205,7 @@ class Clock extends Component<ClockType> {
               <TouchableHighlight onPress={this.showDateClick}>
                 <View>
                   <Image
-                    style={image}
+                    style={control}
                     source={require("../assets/show-date.png")}
                   />
                 </View>
