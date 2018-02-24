@@ -15,7 +15,8 @@ import {
   MIN_BRIGHTNESS,
   MAX_BRIGHTNESS,
   DIMMER_RATIO,
-  MESSAGE_DWELL
+  MESSAGE_DWELL,
+  BUILD_ID
 } from "./appstate";
 
 import {
@@ -75,25 +76,23 @@ class Clock extends Component<ClockType> {
   };
 
   brighterClick = () => {
-    const clock = this.props.clock;
-    if (clock.brightness === MAX_BRIGHTNESS) {
-      this.showMessage(`Maximum ${clock.brightness * 100}% brightness.`);
-    } else {
-      let new_brightness = clock.brightness / DIMMER_RATIO;
-      if (new_brightness > MAX_BRIGHTNESS) new_brightness = MAX_BRIGHTNESS;
+    const old_brightness = this.props.clock.brightness;
+    let new_brightness = old_brightness / DIMMER_RATIO;
+    if (new_brightness > MAX_BRIGHTNESS) new_brightness = MAX_BRIGHTNESS;
+    if (new_brightness !== old_brightness) {
       this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });
     }
+    this.showMessage(`${Math.round(new_brightness * 100)}%`);
   };
 
   dimmerClick = () => {
-    const clock = this.props.clock;
-    if (clock.brightness === MIN_BRIGHTNESS) {
-      this.showMessage(`Minimum ${clock.brightness * 100}% brightness.`);
-    } else {
-      let new_brightness = clock.brightness * DIMMER_RATIO;
-      if (new_brightness < MIN_BRIGHTNESS) new_brightness = MIN_BRIGHTNESS;
+    const old_brightness = this.props.clock.brightness;
+    let new_brightness = old_brightness * DIMMER_RATIO;
+    if (new_brightness < MIN_BRIGHTNESS) new_brightness = MIN_BRIGHTNESS;
+    if (new_brightness !== old_brightness) {
       this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });
     }
+    this.showMessage(`${Math.round(new_brightness * 100)}%`);
   };
 
   showControlsClick = () => {
@@ -117,7 +116,7 @@ class Clock extends Component<ClockType> {
   };
 
   showVersionPress = () => {
-    this.showMessage("Build version 2018-02-23 18:45:10");
+    this.showMessage(`Build id ${BUILD_ID}`);
   };
 
   render() {
