@@ -4,9 +4,9 @@
 
 You can make the clock display quite dim in order to be readable at night without adding much illumination to the room. Studies have shown that ambient light at night can reduce sleep quality and can also lead to nearsightedness due to the eyes constantly attempting to focus while sleeping.
 
-Install the Expo app to your phone and run the live demo!
+Install the Expo app on your phone and run the live demo!
 
-__[Live demo](exp://2s-v9g.johngorman.bedside-clock-react-native.exp.direct:80)__
+__[Live demo](https://expo.io/@johngorman/bedside-clock)__
 
 ## Controls
 
