@@ -1,12 +1,12 @@
-# bedside-clock-react-native
+# darkest-night-clock-react-native
 
-> A bedside clock app written in React Native with Expo
+## A very dimmable night clock app written in React Native
 
 You can make the clock display quite dim in order to be readable at night without adding much illumination to the room. Studies have shown that ambient light at night can reduce sleep quality and can also lead to nearsightedness due to the eyes constantly attempting to focus while sleeping.
 
 Install the Expo app on your phone and run the live demo!
 
-__[Live demo](https://expo.io/@johngorman/bedside-clock)__
+__[Live demo](https://expo.io/@johngorman/darkest-night-clock)__
 
 ## Controls
 
@@ -20,7 +20,7 @@ __[Live demo](https://expo.io/@johngorman/bedside-clock)__
 ## Technical Details
 
 - Written in React Native with Redux state management.
-- Co-written as a SPA: __[Bedside Clock - ReactJS](https://github.com/jgorman/bedside-clock-react-js)__
+- Co-written as a SPA: __[Darkest Night Clock - ReactJS](https://github.com/jgorman/darkest-night-clock-react-js)__
 - There is a lot of shared code between the two projects.
 - The appstate.js Redux reducer file is identical between the two projects because the state flow is the same.
 - A great pair of simple no frills projects for anyone who wants to see exactly how React.js and React Native differ and how to port between them.

@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Clock",
-    "description": "Bedside clock.",
-    "slug": "bedside-clock",
+    "description": "Darkest Night Clock.",
+    "slug": "darkest-night-clock",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
