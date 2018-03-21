@@ -7,7 +7,7 @@
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
-    "orientation": "landscape",
+    "orientation": "default",
     "icon": "./assets/clock-1024x1024.png",
     "splash": {
       "image": "./assets/clock-1024x1024.png",
