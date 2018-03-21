@@ -82,7 +82,14 @@ class Clock extends Component<ClockType> {
     if (new_brightness !== old_brightness) {
       this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });
     }
-    this.showMessage(`${Math.round(new_brightness * 100)}%`);
+    let message = `${Math.round(new_brightness * 100)}%`;
+    if (
+      new_brightness === old_brightness &&
+      this.props.clock.userMessageTimeoutID
+    ) {
+      message = `${message} Version ${VERSION}`;
+    }
+    this.showMessage(message);
   };
 
   dimmerClick = () => {
@@ -165,20 +172,21 @@ class Clock extends Component<ClockType> {
             )}
 
             <View style={{ flexDirection: "row" }}>
-              <TouchableHighlight onPress={this.brighterClick}>
-                <View>
-                  <Image
-                    style={control}
-                    source={require("../assets/plus-circle.png")}
-                  />
-                </View>
-              </TouchableHighlight>
 
               <TouchableHighlight onPress={this.dimmerClick}>
                 <View>
                   <Image
                     style={control}
                     source={require("../assets/minus-circle.png")}
+                  />
+                </View>
+              </TouchableHighlight>
+
+              <TouchableHighlight onPress={this.brighterClick}>
+                <View>
+                  <Image
+                    style={control}
+                    source={require("../assets/plus-circle.png")}
                   />
                 </View>
               </TouchableHighlight>
