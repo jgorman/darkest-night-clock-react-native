@@ -1,6 +1,9 @@
 // @flow
 /* Utilities. */
 
+// $FlowFixMe
+import { Dimensions } from "react-native";
+
 export const zeropad = (num: number | string, len: number): string => {
   const str = num.toString();
   if (str.length >= len) return str;
@@ -37,3 +40,15 @@ export const formatDate = (date: Date): string => {
   const month2 = zeropad(month, 2);
   return `${year}-${month2}-${day2}`;
 };
+
+export const fontFit = (
+  str: string,
+  width: number,
+  fill: number = 1.0
+): number => {
+  const fontScale = 1.8; // 1.9 is too big for iPhone 5s.
+  const px = Math.round(width / str.length * fontScale * fill);
+  return px;
+};
+
+export const viewWidth = () => Dimensions.get("window").width;

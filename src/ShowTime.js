@@ -4,7 +4,7 @@ import React from "react";
 import { View, Text, Dimensions } from "react-native";
 // $FlowFixMe
 import PropTypes from "prop-types";
-import { formatDate, formatTime } from "./utils";
+import { formatDate, formatTime, viewWidth, fontFit } from "./utils";
 
 /*
 Auto scale font to fit using undocumented features.
@@ -18,8 +18,8 @@ type ShowTimeType = {
 };
 
 export const ShowTime = (props: ShowTimeType) => {
-  const { width } = Dimensions.get("window");
   const time = formatTime(props.date, props.showSeconds);
+  const width = viewWidth();
   const fontSize = fontFit(time, width);
   const box = {
     height: fontSize * 0.85,
@@ -50,7 +50,7 @@ type ShowDateType = {
 
 export const ShowDate = (props: ShowDateType) => {
   const date = formatDate(props.date);
-  const { width } = Dimensions.get("window");
+  const width = viewWidth();
   const fontSize = fontFit(date, width, 0.6);
   const box = {
     height: fontSize * 0.85,
@@ -70,9 +70,4 @@ export const ShowDate = (props: ShowDateType) => {
 ShowDate.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   color: PropTypes.string.isRequired
-};
-
-const fontFit = (str: string, width: number, fill = 1.0): number => {
-  const fontScale = 1.8; // 1.9 is too big for iPhone 5s.
-  return width / str.length * fontScale * fill;
 };
