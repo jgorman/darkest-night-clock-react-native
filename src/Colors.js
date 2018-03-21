@@ -38,9 +38,9 @@ export const Colors = (props: { click: Function }) => {
   return (
     <View style={{ flexDirection: "row" }}>
       <Color click={click} color={0xff0000} />
-      <Color click={click} color={0xff00ff} />
-      <Color click={click} color={0x0000ff} />
-      <Color click={click} color={0xffff00} />
+      <Color click={click} color={0x00bb00} />
+      <Color click={click} color={0x6666ff} />
+      <Color click={click} color={0xffd700} />
       <Color click={click} color={0xffffff} />
     </View>
   );
