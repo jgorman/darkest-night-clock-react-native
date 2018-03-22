@@ -1,11 +1,12 @@
 // @flow
 import React, { Component } from "react";
 // $FlowFixMe
-import { View, Image, Text, TouchableHighlight, StatusBar } from "react-native";
+import { View, Text, TouchableHighlight, StatusBar } from "react-native";
 // $FlowFixMe
 import { connect } from "react-redux";
 
 import { ShowTime, ShowDate } from "./ShowTime";
+import { Controls } from "./Controls";
 import { Colors } from "./Colors";
 import { formatColor, scaleColor, viewWidth, fontFit } from "./utils";
 
@@ -132,12 +133,6 @@ class Clock extends Component<ClockType> {
     const width = viewWidth();
     const controlWidth = fontFit("Control Icons", width, 0.8);
 
-    const control = {
-      height: controlWidth,
-      width: controlWidth,
-      margin: 5
-    };
-
     return (
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight
@@ -170,55 +165,8 @@ class Clock extends Component<ClockType> {
             {clock.showColors ? (
               <Colors size={controlWidth} click={this.setColorClick} />
             ) : (
-              undefined
+              <Controls size={controlWidth} clock={this} />
             )}
-
-            <View style={{ flexDirection: "row" }}>
-              <TouchableHighlight onPress={this.dimmerClick}>
-                <View>
-                  <Image
-                    style={control}
-                    source={require("../assets/minus-circle.png")}
-                  />
-                </View>
-              </TouchableHighlight>
-
-              <TouchableHighlight onPress={this.brighterClick}>
-                <View>
-                  <Image
-                    style={control}
-                    source={require("../assets/plus-circle.png")}
-                  />
-                </View>
-              </TouchableHighlight>
-
-              <TouchableHighlight onPress={this.showColorClick}>
-                <View>
-                  <Image
-                    style={control}
-                    source={require("../assets/colors.png")}
-                  />
-                </View>
-              </TouchableHighlight>
-
-              <TouchableHighlight onPress={this.showSecondsClick}>
-                <View>
-                  <Image
-                    style={control}
-                    source={require("../assets/seconds.png")}
-                  />
-                </View>
-              </TouchableHighlight>
-
-              <TouchableHighlight onPress={this.showDateClick}>
-                <View>
-                  <Image
-                    style={control}
-                    source={require("../assets/show-date.png")}
-                  />
-                </View>
-              </TouchableHighlight>
-            </View>
           </View>
         ) : (
           undefined

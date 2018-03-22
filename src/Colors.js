@@ -8,7 +8,7 @@ import { formatColor } from "./utils";
 
 type ColorType = {
   color: number,
-  size: string,
+  size: number,
   click: Function
 };
 
