@@ -9,6 +9,7 @@
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/clock-1024x1024.png",
+    "ios.icon": "./assets/clock-ios-1024x1024.png",
     "splash": {
       "image": "./assets/clock-1024x1024.png",
       "resizeMode": "contain",

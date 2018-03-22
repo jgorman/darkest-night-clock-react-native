@@ -5,6 +5,9 @@
 batik-rasterizer -dpi 2048 -h 1024 -w 1024 clock.svg \
   -d ../assets/clock-1024x1024.png
 
+batik-rasterizer -dpi 2048 -h 1024 -w 1024 clock-ios.svg \
+  -d ../assets/clock-ios-1024x1024.png
+
 for f in colors minus-circle plus-circle seconds show-date; do
   batik-rasterizer -dpi 2048 -h 100 -w 100 $f.svg -d ../assets/$f.png
 done
