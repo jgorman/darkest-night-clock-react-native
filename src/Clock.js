@@ -123,28 +123,22 @@ class Clock extends Component<ClockType> {
     this.props.dispatch({ type: TOGGLE_DATE });
   };
 
-  showVersionPress = () => {
-    this.showMessage(`Darkest Night Clock ${VERSION}`);
-  };
-
   render() {
     const clock = this.props.clock;
     const color = formatColor(scaleColor(clock.color, clock.brightness));
     const width = viewWidth();
     const controlWidth = fontFit("Control Icons", width, 0.8);
 
+    const message = {
+      color: "white",
+      height: 20
+    };
+
     return (
       <View style={{ alignItems: "center" }}>
-        <TouchableHighlight
-          onPress={this.showControlsClick}
-          onLongPress={this.showVersionPress}
-        >
+        <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            {clock.userMessage && clock.userMessageTimeoutID ? (
-              <Text style={{ color: "white" }}>{clock.userMessage}</Text>
-            ) : (
-              undefined
-            )}
+            <Text style={message}>{clock.userMessage}</Text>
 
             <ShowTime
               date={clock.date}

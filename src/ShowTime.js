@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 // $FlowFixMe
-import { View, Text, Dimensions } from "react-native";
+import { View, Text } from "react-native";
 // $FlowFixMe
 import PropTypes from "prop-types";
 import { formatDate, formatTime, viewWidth, fontFit } from "./utils";
