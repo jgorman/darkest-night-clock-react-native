@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Clock",
+    "name": "Dark Clock",
     "description": "Darkest Night Clock.",
     "slug": "darkest-night-clock",
     "privacy": "public",
@@ -8,15 +8,23 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "default",
+    "githubUrl": "https://github.com/jgorman/darkest-night-clock-react-js",
+    "primaryColor": "#000000",
     "icon": "./assets/clock-1024x1024.png",
-    "ios.icon": "./assets/clock-ios-1024x1024.png",
     "splash": {
       "image": "./assets/clock-1024x1024.png",
       "resizeMode": "contain",
-      "backgroundColor": "#111111"
+      "backgroundColor": "#000000"
     },
     "ios": {
+      "bundleIdentifier": "io.johngorman.darkest-night-clock",
+      "buildNumber": "1.0.0",
+      "icon": "./assets/clock-ios-1024x1024.png",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "io.johngorman.darkest-night-clock",
+      "versionCode": 2
     }
   }
 }
