@@ -2,7 +2,7 @@
 /* React Native utilities. */
 
 // $FlowFixMe
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Dimensions } from "react-native";
 
 import type { ClockState } from "./appstate";
 import { SETTINGS_KEY } from "./appstate";
@@ -24,3 +24,5 @@ export const getOldState = (success: Function) => {
     })
     .catch(err => {}); // Discard missing or corrupted old state.
 };
+
+export const viewWidth = () => Dimensions.get("window").width;

@@ -4,7 +4,8 @@ import React from "react";
 import { View, Text } from "react-native";
 // $FlowFixMe
 import PropTypes from "prop-types";
-import { formatDate, formatTime, viewWidth, fontFit } from "./utils";
+import { formatDate, formatTime, fontFit } from "./utils";
+import { viewWidth } from "./platform";
 
 /*
 Auto scale font to fit using undocumented features.

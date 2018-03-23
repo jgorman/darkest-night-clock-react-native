@@ -8,7 +8,8 @@ import { connect } from "react-redux";
 import { ShowTime, ShowDate } from "./ShowTime";
 import { Controls } from "./Controls";
 import { Colors } from "./Colors";
-import { formatColor, scaleColor, viewWidth, fontFit } from "./utils";
+import { formatColor, scaleColor, fontFit } from "./utils";
+import { viewWidth } from "./platform";
 
 import type { ClockState } from "./appstate";
 

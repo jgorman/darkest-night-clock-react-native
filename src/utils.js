@@ -1,9 +1,6 @@
 // @flow
 /* Utilities. */
 
-// $FlowFixMe
-import { Dimensions } from "react-native";
-
 export const zeropad = (num: number | string, len: number): string => {
   const str = num.toString();
   if (str.length >= len) return str;
@@ -50,5 +47,3 @@ export const fontFit = (
   const px = Math.round(width / str.length * fontScale * fill);
   return px;
 };
-
-export const viewWidth = () => Dimensions.get("window").width;
