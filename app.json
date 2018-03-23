@@ -7,7 +7,7 @@
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
     "assetBundlePatterns": [ "assets/*" ],
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "default",
     "githubUrl": "https://github.com/jgorman/darkest-night-clock-react-js",
     "primaryColor": "#000000",
@@ -19,14 +19,14 @@
     },
     "ios": {
       "bundleIdentifier": "io.johngorman.darkest-night-clock",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.2",
       "icon": "./assets/clock-ios-1024x1024.png",
       "loadJSInBackgroundExperimental": true,
       "supportsTablet": true
     },
     "android": {
       "package": "io.johngorman.darkest_night_clock",
-      "versionCode": 1
+      "versionCode": 2
     }
   }
 }
