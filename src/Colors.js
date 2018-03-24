@@ -16,10 +16,15 @@ const Color = (props: ColorType) => {
   const color = formatColor(props.color);
   const size = props.size;
 
+  // Color dots should match control icon visible circle size: 22/24 of image.
+  const dotSize = size * 22 / 24;
+  const extraMargin = (size - dotSize) / 2;
+
   const paintChip = {
-    width: size,
-    height: size,
-    margin: 5,
+    width: dotSize,
+    height: dotSize,
+		borderRadius: dotSize,
+    margin: 5 + extraMargin,
     backgroundColor: color
   };
 
