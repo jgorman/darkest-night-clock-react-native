@@ -19,7 +19,7 @@ export default class App extends React.Component {
     // Watch to see when we need to save the ClockState.
     store.subscribe(() => {
       const state = store.getState();
-      if (state.dirty) {
+      if (state.unsavedState) {
         store.dispatch({ type: REDUX_STORAGE_SAVE });
       }
     });
