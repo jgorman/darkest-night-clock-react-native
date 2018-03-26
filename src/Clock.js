@@ -158,7 +158,11 @@ class Clock extends Component<ClockType> {
       <View style={{ alignItems: "center" }}>
         <TouchableHighlight onPress={this.showControlsClick}>
           <View style={{ alignItems: "center" }}>
-            <Text style={message}>{clock.userMessage}</Text>
+            {clock.showControls ? (
+              <Text style={message}>{clock.userMessage}</Text>
+            ) : (
+              undefined
+            )}
 
             <ShowTime
               date={clock.date}
