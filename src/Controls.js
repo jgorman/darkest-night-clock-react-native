@@ -21,8 +21,8 @@ export const Controls = (props: ControlsType) => {
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableHighlight
-        onPressIn={Clock.dimmerStart}
-        onPressOut={Clock.brightnessEnd}
+        onPressIn={Clock.dimmerPress}
+        onPressOut={Clock.endPress}
         >
         <View>
           <Image
@@ -33,8 +33,8 @@ export const Controls = (props: ControlsType) => {
       </TouchableHighlight>
 
       <TouchableHighlight
-        onPressIn={Clock.brighterStart}
-        onPressOut={Clock.brightnessEnd}
+        onPressIn={Clock.brighterPress}
+        onPressOut={Clock.endPress}
         >
         <View>
           <Image
