@@ -183,7 +183,7 @@ class Clock extends Component<ClockType> {
             {clock.showColors ? (
               <Colors size={controlWidth} click={this.setColorClick} />
             ) : (
-              <Controls size={controlWidth} clock={this} />
+              <Controls size={controlWidth} Clock={this} />
             )}
           </View>
         ) : (

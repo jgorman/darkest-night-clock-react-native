@@ -5,12 +5,12 @@ import { View, Image, TouchableHighlight } from "react-native";
 
 type ControlsType = {
   size: number,
-  clock: Object
+  Clock: Object
 };
 
 export const Controls = (props: ControlsType) => {
   const size = props.size;
-  const clock = props.clock;
+  const Clock = props.Clock;
 
   const control = {
     height: size,
@@ -21,8 +21,8 @@ export const Controls = (props: ControlsType) => {
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableHighlight
-        onPressIn={clock.dimmerStart}
-        onPressOut={clock.brightnessEnd}
+        onPressIn={Clock.dimmerStart}
+        onPressOut={Clock.brightnessEnd}
         >
         <View>
           <Image
@@ -33,8 +33,8 @@ export const Controls = (props: ControlsType) => {
       </TouchableHighlight>
 
       <TouchableHighlight
-        onPressIn={clock.brighterStart}
-        onPressOut={clock.brightnessEnd}
+        onPressIn={Clock.brighterStart}
+        onPressOut={Clock.brightnessEnd}
         >
         <View>
           <Image
@@ -44,19 +44,19 @@ export const Controls = (props: ControlsType) => {
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={clock.showColorClick}>
+      <TouchableHighlight onPress={Clock.showColorClick}>
         <View>
           <Image style={control} source={require("../assets/colors.png")} />
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={clock.showSecondsClick}>
+      <TouchableHighlight onPress={Clock.showSecondsClick}>
         <View>
           <Image style={control} source={require("../assets/seconds.png")} />
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={clock.showDateClick}>
+      <TouchableHighlight onPress={Clock.showDateClick}>
         <View>
           <Image style={control} source={require("../assets/show-date.png")} />
         </View>
