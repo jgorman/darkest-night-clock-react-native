@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, StatusBar } from "react-native";
 import { KeepAwake } from "expo";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -23,6 +23,8 @@ export default class App extends React.Component {
         store.dispatch({ type: REDUX_STORAGE_SAVE });
       }
     });
+
+    StatusBar.setHidden(true);
   };
 
   render() {

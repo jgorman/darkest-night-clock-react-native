@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 // $FlowFixMe
-import { View, Text, TouchableHighlight, StatusBar } from "react-native";
+import { View, Text, TouchableHighlight } from "react-native";
 // $FlowFixMe
 import { connect } from "react-redux";
 
@@ -43,7 +43,6 @@ class Clock extends Component<ClockType> {
 
   componentDidMount = () => {
     this.timerID = setInterval(() => this.tick(), 1000);
-    StatusBar.setHidden(true);
   };
 
   componentWillUnmount = () => {
