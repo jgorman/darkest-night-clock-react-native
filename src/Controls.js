@@ -5,60 +5,66 @@ import { View, Image, TouchableHighlight } from "react-native";
 
 type ControlsType = {
   size: number,
-  Clock: Object
+  clock: Object
 };
 
 export const Controls = (props: ControlsType) => {
   const size = props.size;
-  const Clock = props.Clock;
+  const clock = props.clock;
 
-  const control = {
+  const control_style = {
     height: size,
     width: size,
     margin: 5
   };
 
+  const message_style = {
+    color: "white",
+    fontSize: 50,
+    height: 50
+  };
+
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableHighlight
-        onPressIn={Clock.dimmerPress}
-        onPressOut={Clock.endPress}
+        onPressIn={clock.dimmerPress}
+        onPressOut={clock.endPress}
         >
         <View>
           <Image
-            style={control}
+            style={control_style}
             source={require("../assets/minus-circle.png")}
           />
         </View>
       </TouchableHighlight>
 
       <TouchableHighlight
-        onPressIn={Clock.brighterPress}
-        onPressOut={Clock.endPress}
+        onPressIn={clock.brighterPress}
+        onPressOut={clock.endPress}
         >
         <View>
           <Image
-            style={control}
+            style={control_style}
             source={require("../assets/plus-circle.png")}
           />
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={Clock.showColorClick}>
+      <TouchableHighlight onPress={clock.showColorClick}>
         <View>
-          <Image style={control} source={require("../assets/colors.png")} />
+          <Image style={control_style} source={require("../assets/colors.png")} />
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={Clock.showSecondsClick}>
+      <TouchableHighlight onPress={clock.showSecondsClick}>
         <View>
-          <Image style={control} source={require("../assets/seconds.png")} />
+          <Image style={control_style} source={require("../assets/seconds.png")} />
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={Clock.showDateClick}>
+      <TouchableHighlight onPress={clock.showDateClick}>
         <View>
-          <Image style={control} source={require("../assets/show-date.png")} />
+          <Image style={control_style} source={require("../assets/show-date.png")} />
         </View>
       </TouchableHighlight>
     </View>

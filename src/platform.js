@@ -25,4 +25,10 @@ export const getOldState = (success: Function) => {
     .catch(err => {}); // Discard missing or corrupted old state.
 };
 
+// Viewport dimensions.
 export const viewWidth = () => Dimensions.get("window").width;
+export const viewHeight = () => Dimensions.get("window").height;
+
+// Prevent default in JS only.
+// $FlowFixMe
+export const preventDefault = (e) => {};

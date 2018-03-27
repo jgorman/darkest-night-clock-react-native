@@ -1,16 +1,12 @@
 // @flow
-import React, { Component } from "react";
-// $FlowFixMe
-import { View, Text, TouchableHighlight } from "react-native";
+import { Component } from "react";
 // $FlowFixMe
 import { connect } from "react-redux";
 
-import { ShowTime, ShowDate } from "./ShowTime";
-import { Controls } from "./Controls";
-import { Colors } from "./Colors";
-import { formatColor, scaleColor, fontFit } from "./utils";
-import { viewWidth } from "./platform";
-
+import { formatTime, formatDate, formatColor } from "./utils";
+import { scaleColor, fontFit } from "./utils";
+import { viewWidth, viewHeight, preventDefault } from "./platform";
+import { ClockRender } from "./ClockRender";
 import type { ClockState } from "./appstate";
 
 import {
@@ -35,7 +31,7 @@ import {
 
 type ClockType = {
   dispatch: Function,
-  clock: ClockState
+  state: ClockState
 };
 
 class Clock extends Component<ClockType> {
@@ -77,46 +73,120 @@ class Clock extends Component<ClockType> {
     });
   };
 
-  brightnessTimeoutID = undefined;
+  /*
+   * These functions handle brightness swiping on the time & date display.
+   */
 
-  brighterPress = () => {
-    this.endPress();
-    this.brighterClick();
-    this.brightnessTimeoutID = setTimeout(this.brighterPress, DIMMER_DWELL);
-  };
+  touchId = undefined;
+  touchFirstX = 0;
+  touchLatestX = 0;
 
-  dimmerPress = () => {
-    this.endPress();
-    this.dimmerClick();
-    this.brightnessTimeoutID = setTimeout(this.dimmerPress, DIMMER_DWELL);
-  };
-
-  endPress = () => {
-    if (this.brightnessTimeoutID) {
-      clearTimeout(this.brightnessTimeoutID);
-      this.brightnessTimeoutID = undefined;
+  brightnessStart = e => {
+    e.preventDefault();
+    const touch = e.changedTouches[0];
+    if (touch) {
+      this.touchId = touch.identifier;
+      this.touchFirstX = touch.pageX;
+      this.touchLatestX = touch.pageX;
     }
   };
 
+  brightnessMove = e => {
+    e.preventDefault();
+    const touch = e.targetTouches[0];
+    if (touch) {
+      this.brightnessDiff(touch.identifier, touch.pageX);
+    }
+  };
+
+  brightnessEnd = e => {
+    e.preventDefault();
+    const touch = e.changedTouches[0];
+    if (touch) {
+      this.brightnessDiff(touch.identifier, touch.pageX);
+    }
+    if (Math.abs(this.touchFirstX - this.touchLatestX) < 2.0) {
+      // If there was little movement, treat it like a click.
+      this.props.dispatch({ type: TOGGLE_CONTROLS });
+    }
+    this.touchId = undefined;
+  };
+
+  brightnessDiff = (id, x) => {
+    if (id === this.touchId && this.touchLatestX !== x) {
+      const width = viewWidth();
+      const diff = x - this.touchLatestX;
+      const old_brightness = this.props.state.brightness;
+      let new_brightness = old_brightness + 2 * diff / width;
+      if (new_brightness < MIN_BRIGHTNESS) new_brightness = MIN_BRIGHTNESS;
+      if (new_brightness > MAX_BRIGHTNESS) new_brightness = MAX_BRIGHTNESS;
+      if (new_brightness !== old_brightness) {
+        this.props.dispatch({
+          type: SET_BRIGHTNESS,
+          brightness: new_brightness
+        });
+      }
+      this.touchLatestX = x;
+      this.showMessage(`${Math.round(new_brightness * 100)}%`);
+    }
+  };
+
+  /*
+   * These functions handle presses and clicks on the brighter / dimmer buttons.
+   * Phone browsers call onTouchStart/onTouchEnd so we can run continuous
+   * brightening or dimming while pressing and ignore the click events.
+   * Desktop browsers run on clicks alone.
+   */
+  pressingTimeoutID = undefined;
+
+  // Keep calling ourselves until endPress cancels the timer.
+  brighterPress = e => {
+    this.endPress();
+    this.pressingTimeoutID = setTimeout(this.brighterPress, DIMMER_DWELL);
+    this.brighterClick();
+  };
+
+  // Keep calling ourselves until endPress cancels the timer.
+  dimmerPress = e => {
+    this.endPress();
+    this.pressingTimeoutID = setTimeout(this.dimmerPress, DIMMER_DWELL);
+    this.dimmerClick();
+  };
+
+  // Cancel the timer and cancel the click.
+  endPress = e => {
+    preventDefault(e); // Cancel the click in js.
+    if (this.pressingTimeoutID) {
+      clearTimeout(this.pressingTimeoutID); // Cancel the timer.
+      this.pressingTimeoutID = undefined;
+    }
+  };
+
+  // One tick brighter.
   brighterClick = () => {
-    const old_brightness = this.props.clock.brightness;
+    const old_brightness = this.props.state.brightness;
     let new_brightness = old_brightness / DIMMER_RATIO;
     if (new_brightness > MAX_BRIGHTNESS) new_brightness = MAX_BRIGHTNESS;
-    if (new_brightness !== old_brightness) {
-      this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });
-    }
     let message = `${Math.round(new_brightness * 100)}%`;
-    if (new_brightness === old_brightness && this.props.clock.userMessage) {
-      message = `${message} Darkest Night Clock ${VERSION}`;
+    if (new_brightness === old_brightness) {
+      this.endPress(); // Catch runaway brighterPress on ios.chrome.
+      if (this.props.state.userMessage) {
+        message = `${message} Darkest Night Clock ${VERSION}`;
+      }
+    } else {
+      this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });
     }
     this.showMessage(message);
   };
 
+  // One tick dimmer.
   dimmerClick = () => {
-    const old_brightness = this.props.clock.brightness;
+    const old_brightness = this.props.state.brightness;
     let new_brightness = old_brightness * DIMMER_RATIO;
     if (new_brightness < MIN_BRIGHTNESS) new_brightness = MIN_BRIGHTNESS;
-    if (new_brightness !== old_brightness) {
+    if (new_brightness === old_brightness) {
+      this.endPress(); // Catch runaway dimmerPress on ios.chrome.
+    } else {
       this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });
     }
     this.showMessage(`${Math.round(new_brightness * 100)}%`);
@@ -143,58 +213,51 @@ class Clock extends Component<ClockType> {
   };
 
   render() {
-    const clock = this.props.clock;
-    const color = formatColor(scaleColor(clock.color, clock.brightness));
+    const state = this.props.state;
+    const calc = {};
+    calc.color = formatColor(scaleColor(state.color, state.brightness));
+
     const width = viewWidth();
-    const controlWidth = fontFit("Control Icons", width, 0.8);
+    const height = viewHeight();
 
-    const message = {
-      color: "white",
-      height: 20
-    };
+    // Calculate the time height.
+    calc.time_s = formatTime(state.date, state.showSeconds);
+    calc.time_h = fontFit(calc.time_s, width);
 
-    return (
-      <View style={{ alignItems: "center" }}>
-        <TouchableHighlight onPress={this.showControlsClick}>
-          <View style={{ alignItems: "center" }}>
-            {clock.showControls ? (
-              <Text style={message}>{clock.userMessage}</Text>
-            ) : (
-              undefined
-            )}
+    // Calculate the optional date height.
+    calc.date_s = undefined;
+    calc.date_h = 0;
+    if (state.showDate) {
+      calc.date_s = formatDate(state.date);
+      calc.date_h = fontFit(calc.date_s, width, 0.6);
+    }
 
-            <ShowTime
-              date={clock.date}
-              showSeconds={clock.showSeconds}
-              color={color}
-            />
+    // Calculate the optional controls height.
+    calc.control_h = 0;
+    if (state.showControls) {
+      calc.control_h = fontFit("Control Icons", width, 0.8);
+    }
 
-            {clock.showDate ? (
-              <ShowDate date={clock.date} color={color} />
-            ) : (
-              undefined
-            )}
-          </View>
-        </TouchableHighlight>
+    // Calculate the message height.
+    calc.message_h = (calc.time_h + calc.date_h + calc.control_h) * 0.08;
 
-        {clock.showControls ? (
-          <View style={{ alignItems: "center" }}>
-            {clock.showColors ? (
-              <Colors size={controlWidth} click={this.setColorClick} />
-            ) : (
-              <Controls size={controlWidth} Clock={this} />
-            )}
-          </View>
-        ) : (
-          undefined
-        )}
-      </View>
-    );
+    // Scale for vertical fit if necessary, leaving room for padding.
+    let total_h = calc.time_h + calc.date_h + calc.control_h + calc.message_h;
+    let target_h = height * 0.9;
+    if (total_h > target_h) {
+      const ratio = target_h / total_h;
+      calc.time_h *= ratio;
+      calc.date_h *= ratio;
+      calc.control_h *= ratio;
+      calc.message_h *= ratio;
+    }
+
+    return ClockRender(this, state, calc);
   }
 }
 
 function mapStateToProps(state: ClockState) {
-  return { clock: state };
+  return { state: state };
 }
 
 export default connect(mapStateToProps)(Clock);
