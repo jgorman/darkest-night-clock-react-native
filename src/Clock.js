@@ -83,6 +83,7 @@ class Clock extends Component<ClockType> {
 
   brightnessStart = e => {
     e.preventDefault();
+    if (e.nativeEvent) e = e.nativeEvent;
     const touch = e.changedTouches[0];
     if (touch) {
       this.touchId = touch.identifier;
@@ -93,7 +94,8 @@ class Clock extends Component<ClockType> {
 
   brightnessMove = e => {
     e.preventDefault();
-    const touch = e.targetTouches[0];
+    if (e.nativeEvent) e = e.nativeEvent;
+    const touch = e.changedTouches[0];
     if (touch) {
       this.brightnessDiff(touch.identifier, touch.pageX);
     }
@@ -101,12 +103,13 @@ class Clock extends Component<ClockType> {
 
   brightnessEnd = e => {
     e.preventDefault();
+    if (e.nativeEvent) e = e.nativeEvent;
     const touch = e.changedTouches[0];
     if (touch) {
       this.brightnessDiff(touch.identifier, touch.pageX);
     }
     if (Math.abs(this.touchFirstX - this.touchLatestX) < 2.0) {
-      // If there was little movement, treat it like a click.
+      // If there was very little movement, treat it like a click.
       this.props.dispatch({ type: TOGGLE_CONTROLS });
     }
     this.touchId = undefined;

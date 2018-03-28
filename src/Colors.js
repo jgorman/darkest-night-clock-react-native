@@ -23,7 +23,7 @@ const Color = (props: ColorType) => {
   const paintChip = {
     width: dotSize,
     height: dotSize,
-		borderRadius: dotSize,
+    borderRadius: dotSize,
     margin: 5 + extraMargin,
     backgroundColor: color
   };

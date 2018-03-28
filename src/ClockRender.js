@@ -35,25 +35,30 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
 
   return (
     <View style={{ alignItems: "center" }}>
-      <TouchableHighlight onPress={clock.showControlsClick}>
-        <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center" }}
+        onStartShouldSetResponder={() => true}
+        onResponderTerminationRequest={() => true}
+        onResponderGrant={clock.brightnessStart}
+        onResponderMove={clock.brightnessMove}
+        onResponderRelease={clock.brightnessEnd}
+        onResponderTerminate={clock.brightnessEnd}
+      >
 
-					<Text style={message_style}>{state.userMessage}</Text>
+        <Text style={message_style}>{state.userMessage}</Text>
 
-					<View style={time_box_style}>
-						<Text style={time_text_style}>{calc.time_s}</Text>
-					</View>
-
-          {state.showDate ? (
-						<View style={date_box_style}>
-							<Text style={date_text_style}>{calc.date_s}</Text>
-						</View>
-          ) : (
-            undefined
-          )}
-
+        <View style={time_box_style}>
+          <Text style={time_text_style}>{calc.time_s}</Text>
         </View>
-      </TouchableHighlight>
+
+        {state.showDate ? (
+          <View style={date_box_style}>
+            <Text style={date_text_style}>{calc.date_s}</Text>
+          </View>
+        ) : (
+          undefined
+        )}
+
+      </View>
 
       {state.showControls ? (
         <View style={{ alignItems: "center" }}>
