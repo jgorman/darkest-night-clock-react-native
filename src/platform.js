@@ -7,6 +7,8 @@ import { AsyncStorage, Dimensions } from "react-native";
 import type { ClockState } from "./appstate";
 import { SETTINGS_KEY } from "./appstate";
 
+export const isNative = true;
+
 // Save state in browser storage.
 export const saveState = (state: ClockState) => {
   const settings = JSON.stringify(state);
@@ -28,7 +30,3 @@ export const getOldState = (success: Function) => {
 // Viewport dimensions.
 export const viewWidth = () => Dimensions.get("window").width;
 export const viewHeight = () => Dimensions.get("window").height;
-
-// Prevent default in JS only.
-// $FlowFixMe
-export const preventDefault = (e) => {};

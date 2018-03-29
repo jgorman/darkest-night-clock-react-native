@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { formatTime, formatDate, formatColor } from "./utils";
 import { scaleColor, fontFit } from "./utils";
-import { viewWidth, viewHeight, preventDefault } from "./platform";
+import { viewWidth, viewHeight, isNative } from "./platform";
 import { ClockRender } from "./ClockRender";
 import type { ClockState } from "./appstate";
 
@@ -158,7 +158,7 @@ class Clock extends Component<ClockType> {
 
   // Cancel the timer and cancel the click.
   endPress = e => {
-    preventDefault(e); // Cancel the click in js.
+    if (e && !isNative) e.preventDefault(); // Avoid native warning.
     if (this.pressingTimeoutID) {
       clearTimeout(this.pressingTimeoutID); // Cancel the timer.
       this.pressingTimeoutID = undefined;
@@ -174,7 +174,7 @@ class Clock extends Component<ClockType> {
     if (new_brightness === old_brightness) {
       this.endPress(); // Catch runaway brighterPress on ios.chrome.
       if (this.props.state.userMessage) {
-        message = `${message} Darkest Night Clock ${VERSION}`;
+        message += ` Darkest Night Clock ${isNative ? "App" : ""} ${VERSION}`;
       }
     } else {
       this.props.dispatch({ type: SET_BRIGHTNESS, brightness: new_brightness });

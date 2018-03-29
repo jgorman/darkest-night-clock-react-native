@@ -18,12 +18,6 @@ export const Controls = (props: ControlsType) => {
     margin: 5
   };
 
-  const message_style = {
-    color: "white",
-    fontSize: 50,
-    height: 50
-  };
-
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableHighlight
