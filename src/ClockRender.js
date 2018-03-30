@@ -16,7 +16,7 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
   };
 
   const time_box_style = {
-    height: calc.time_h * 0.85,
+    height: calc.time_h,
     justifyContent: "center"
   };
   const time_text_style = {
@@ -25,7 +25,7 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
   };
 
   const date_box_style = {
-    height: calc.date_h * 0.85,
+    height: calc.date_h,
     justifyContent: "center"
   };
   const date_text_style = {
