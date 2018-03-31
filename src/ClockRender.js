@@ -8,7 +8,6 @@ import { Colors } from "./Colors";
 import type { ClockState } from "./appstate";
 
 export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
-
   const message_style = {
     color: "white",
     fontSize: calc.message_h,
@@ -35,7 +34,8 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
 
   return (
     <View style={{ alignItems: "center" }}>
-      <View style={{ alignItems: "center" }}
+      <View
+        style={{ alignItems: "center" }}
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => true}
         onResponderGrant={clock.brightnessStart}
@@ -43,12 +43,11 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
         onResponderRelease={clock.brightnessEnd}
         onResponderTerminate={clock.brightnessEnd}
       >
-
-        <Text style={message_style}>{state.userMessage}</Text>
-
         <View style={time_box_style}>
           <Text style={time_text_style}>{calc.time_s}</Text>
         </View>
+
+        <Text style={message_style}>{state.userMessage}</Text>
 
         {state.showDate ? (
           <View style={date_box_style}>
@@ -57,7 +56,6 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
         ) : (
           undefined
         )}
-
       </View>
 
       {state.showControls ? (
