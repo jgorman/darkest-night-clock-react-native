@@ -20,7 +20,8 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
   };
   const time_text_style = {
     color: calc.color,
-    fontSize: calc.time_h
+    fontSize: calc.time_h,
+    fontWeight: "100"
   };
 
   const date_box_style = {
@@ -29,7 +30,8 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
   };
   const date_text_style = {
     color: calc.color,
-    fontSize: calc.date_h
+    fontSize: calc.date_h,
+    fontWeight: "100"
   };
 
   return (
