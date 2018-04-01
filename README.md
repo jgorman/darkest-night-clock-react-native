@@ -8,11 +8,8 @@ Studies have shown that ambient light at night can reduce
 sleep quality and can also lead to nearsightedness due to
 the eyes constantly attempting to focus while sleeping.
 
-For iPhones you will be able to install directly from the App Store
-as soon as it is approved.
-
-For Android install the Expo app on your phone and run the
-__[Live demo](https://expo.io/@johngorman/darkest-night-clock)__.
+Try it for yourself and learn more at the
+[Darkest Night Clock Project Page](https://johngorman.io/darkest-night-clock/).
 
 ## Controls
 
