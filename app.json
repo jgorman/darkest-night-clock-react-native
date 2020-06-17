@@ -29,7 +29,9 @@
       "versionCode": 6
     },
     "androidNavigationBar": {
-      "visible": "sticky-immersive"
+      "visible": "sticky-immersive",
+      "barStyle": "dark-content",
+      "backgroundColor": "#222222"
     }
   }
 }
