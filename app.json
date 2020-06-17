@@ -4,7 +4,7 @@
     "description": "Darkest Night Clock.",
     "slug": "darkest-night-clock",
     "privacy": "public",
-    "sdkVersion": "26.0.0",
+    "sdkVersion": "37.0.0",
     "platforms": ["ios", "android"],
     "assetBundlePatterns": [ "assets/*" ],
     "version": "1.0.6",

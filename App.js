@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { KeepAwake } from "expo";
+import { activateKeepAwake } from 'expo-keep-awake';
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { reducer } from "./src/appstate";
@@ -24,6 +24,7 @@ export default class App extends React.Component {
       }
     });
 
+    activateKeepAwake();
     StatusBar.setHidden(true);
   };
 
@@ -31,7 +32,6 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <KeepAwake />
           <Clock />
         </View>
       </Provider>

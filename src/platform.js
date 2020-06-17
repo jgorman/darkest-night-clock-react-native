@@ -5,7 +5,7 @@
 import { AsyncStorage, Dimensions } from "react-native";
 
 import type { ClockState } from "./appstate";
-import { SETTINGS_KEY } from "./appstate";
+const SETTINGS_KEY = "clockSettings"; // Avoid an import loop.
 
 export const isNative = true;
 
