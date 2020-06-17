@@ -27,6 +27,9 @@
     "android": {
       "package": "io.johngorman.darkest_night_clock",
       "versionCode": 6
+    },
+    "androidNavigationBar": {
+      "visible": "sticky-immersive"
     }
   }
 }
