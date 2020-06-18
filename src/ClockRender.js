@@ -1,38 +1,38 @@
 // @flow
-import React from "react";
+import React from "react"
 // $FlowFixMe
-import { View, Text, TouchableHighlight } from "react-native";
-import { Controls } from "./Controls";
-import { Colors } from "./Colors";
+import { View, Text, TouchableHighlight } from "react-native"
+import { Controls } from "./Controls"
+import { Colors } from "./Colors"
 
-import type { ClockState } from "./appstate";
+import type { ClockState } from "./appstate"
 
 export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
   const message_style = {
     color: "white",
     fontSize: calc.message_h,
-    height: calc.message_h * 1.5
-  };
+    height: calc.message_h * 1.5,
+  }
 
   const time_box_style = {
     height: calc.time_h,
-    justifyContent: "center"
-  };
+    justifyContent: "center",
+  }
   const time_text_style = {
     color: calc.color,
     fontSize: calc.time_h,
-    fontWeight: "100"
-  };
+    fontWeight: "100",
+  }
 
   const date_box_style = {
     height: calc.date_h,
-    justifyContent: "center"
-  };
+    justifyContent: "center",
+  }
   const date_text_style = {
     color: calc.color,
     fontSize: calc.date_h,
-    fontWeight: "100"
-  };
+    fontWeight: "100",
+  }
 
   return (
     <View style={{ alignItems: "center" }}>
@@ -55,9 +55,7 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
           <View style={date_box_style}>
             <Text style={date_text_style}>{calc.date_s}</Text>
           </View>
-        ) : (
-          undefined
-        )}
+        ) : undefined}
       </View>
 
       {state.showControls ? (
@@ -68,9 +66,7 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
             <Controls size={calc.control_h} clock={clock} />
           )}
         </View>
-      ) : (
-        undefined
-      )}
+      ) : undefined}
     </View>
-  );
-};
+  )
+}
