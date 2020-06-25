@@ -1,59 +1,74 @@
-// @flow
+/* Render Native Clock. */
+
 import React from "react"
-// $FlowFixMe
-import { View, Text, TouchableHighlight } from "react-native"
+import { View, Text, TouchableHighlight, Platform } from "react-native"
+
+import { geometry } from "./utils"
 import { Controls } from "./Controls"
 import { Colors } from "./Colors"
+import { getViewPort } from "./platform"
 
-import type { ClockState } from "./appstate"
+export const ClockRender = (state, actions) => {
+  const viewPort = getViewPort()
+  const geo = geometry(viewPort, state)
 
-export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
+  const fontFamily = Platform.OS === "ios" ? "HelveticaNeue-Light" : "normal"
+
+  const viewport_style = {
+    flex: 1,
+    backgroundColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
+  }
+
   const message_style = {
     color: "white",
-    fontSize: calc.message_h,
-    height: calc.message_h * 1.5,
+    fontSize: geo.message_h,
+    height: geo.message_h * 1.5,
   }
 
   const time_box_style = {
-    height: calc.time_h,
+    height: geo.time_h,
     justifyContent: "center",
   }
   const time_text_style = {
-    color: calc.color,
-    fontSize: calc.time_h,
+    color: geo.color,
+    fontFamily,
+    fontSize: geo.time_h,
     fontWeight: "100",
   }
 
   const date_box_style = {
-    height: calc.date_h,
+    height: geo.date_h,
     justifyContent: "center",
   }
   const date_text_style = {
-    color: calc.color,
-    fontSize: calc.date_h,
+    color: geo.color,
+    fontFamily,
+    fontSize: geo.date_h,
     fontWeight: "100",
   }
 
   return (
-    <View style={{ alignItems: "center" }}>
+    <View style={viewport_style}>
       <View
         style={{ alignItems: "center" }}
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => true}
-        onResponderGrant={clock.brightnessStart}
-        onResponderMove={clock.brightnessMove}
-        onResponderRelease={clock.brightnessEnd}
-        onResponderTerminate={clock.brightnessEnd}
+        onResponderGrant={actions.brightnessStart}
+        onResponderMove={actions.brightnessMove}
+        onResponderRelease={actions.brightnessEnd}
+        onResponderTerminate={actions.brightnessEnd}
       >
         <View style={time_box_style}>
-          <Text style={time_text_style}>{calc.time_s}</Text>
+          <Text style={time_text_style}>{geo.time_s}</Text>
         </View>
 
-        <Text style={message_style}>{state.userMessage}</Text>
+        <Text style={message_style}>{state.message}</Text>
 
         {state.showDate ? (
           <View style={date_box_style}>
-            <Text style={date_text_style}>{calc.date_s}</Text>
+            <Text style={date_text_style}>{geo.date_s}</Text>
           </View>
         ) : undefined}
       </View>
@@ -61,9 +76,9 @@ export const ClockRender = (clock: Object, state: ClockState, calc: Object) => {
       {state.showControls ? (
         <View style={{ alignItems: "center" }}>
           {state.showColors ? (
-            <Colors size={calc.control_h} click={clock.setColorClick} />
+            <Colors size={geo.control_h} click={actions.setColorClick} />
           ) : (
-            <Controls size={calc.control_h} clock={clock} />
+            <Controls size={geo.control_h} actions={actions} />
           )}
         </View>
       ) : undefined}

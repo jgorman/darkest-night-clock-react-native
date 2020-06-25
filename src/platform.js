@@ -1,16 +1,29 @@
-// @flow
-/* React Native utilities. */
+/* Platform specific functions. */
 
-// $FlowFixMe
-import { AsyncStorage, Dimensions } from "react-native"
+import { AsyncStorage, Dimensions, StatusBar } from "react-native"
+import { activateKeepAwake } from "expo-keep-awake"
 
-import type { ClockState } from "./appstate"
-const SETTINGS_KEY = "clockSettings" // Avoid an import loop.
+import { defaultState, mergeOldState, SETTINGS_KEY } from "./appstate"
 
 export const isNative = true
 
+export const bootState = () => ({})
+
+export const bootClock = (dispatch) => {
+  activateKeepAwake()
+  StatusBar.setHidden(true)
+
+  getOldState((oldState) => {
+    const initialState = mergeOldState(defaultState(), oldState)
+    initialState.date = new Date()
+    dispatch({ type: "set_state", state: initialState })
+  })
+}
+
+export const keepState = (state) => saveState(mergeOldState({}, state))
+
 // Save state in browser storage.
-export const saveState = (state: ClockState) => {
+const saveState = (state) => {
   const settings = JSON.stringify(state)
   AsyncStorage.setItem(SETTINGS_KEY, settings)
     .then(() => {})
@@ -18,7 +31,7 @@ export const saveState = (state: ClockState) => {
 }
 
 // Get state from browser storage.
-export const getOldState = (success: Function) => {
+const getOldState = (success) => {
   AsyncStorage.getItem(SETTINGS_KEY)
     .then((response) => JSON.parse(response))
     .then((settings) => {
@@ -28,5 +41,7 @@ export const getOldState = (success: Function) => {
 }
 
 // Viewport dimensions.
-export const viewWidth = () => Dimensions.get("window").width
-export const viewHeight = () => Dimensions.get("window").height
+export const getViewPort = () => {
+  const window = Dimensions.get("window")
+  return [window.width, window.height]
+}

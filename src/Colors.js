@@ -1,18 +1,17 @@
-// @flow
 import React from "react"
-// $FlowFixMe
 import { View, TouchableHighlight } from "react-native"
-// $FlowFixMe
-import PropTypes from "prop-types"
+
 import { formatColor } from "./utils"
 
-type ColorType = {
-  color: number,
-  size: number,
-  click: Function,
-}
+import {
+  COLOR_RED,
+  COLOR_GREEN,
+  COLOR_BLUE,
+  COLOR_YELLOW,
+  COLOR_WHITE,
+} from "./appstate"
 
-const Color = (props: ColorType) => {
+const Color = (props) => {
   const color = formatColor(props.color)
   const size = props.size
 
@@ -35,32 +34,16 @@ const Color = (props: ColorType) => {
   )
 }
 
-Color.propTypes = {
-  color: PropTypes.number.isRequired,
-  size: PropTypes.number.isRequired,
-  click: PropTypes.func.isRequired,
-}
-
-type ColorsType = {
-  size: number,
-  click: Function,
-}
-
-export const Colors = (props: ColorsType) => {
+export const Colors = (props) => {
   const size = props.size
   const click = props.click
   return (
     <View style={{ flexDirection: "row" }}>
-      <Color size={size} click={click} color={0xff0000} />
-      <Color size={size} click={click} color={0x00bb00} />
-      <Color size={size} click={click} color={0x6666ff} />
-      <Color size={size} click={click} color={0xffd700} />
-      <Color size={size} click={click} color={0xffffff} />
+      <Color size={size} click={click} color={COLOR_RED} />
+      <Color size={size} click={click} color={COLOR_GREEN} />
+      <Color size={size} click={click} color={COLOR_BLUE} />
+      <Color size={size} click={click} color={COLOR_YELLOW} />
+      <Color size={size} click={click} color={COLOR_WHITE} />
     </View>
   )
-}
-
-Colors.propTypes = {
-  size: PropTypes.number.isRequired,
-  click: PropTypes.func.isRequired,
 }

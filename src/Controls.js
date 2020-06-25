@@ -1,16 +1,9 @@
-// @flow
 import React from "react"
-// $FlowFixMe
 import { View, Image, TouchableHighlight } from "react-native"
 
-type ControlsType = {
-  size: number,
-  clock: Object,
-}
-
-export const Controls = (props: ControlsType) => {
+export const Controls = (props) => {
   const size = props.size
-  const clock = props.clock
+  const actions = props.actions
 
   const control_style = {
     height: size,
@@ -21,8 +14,8 @@ export const Controls = (props: ControlsType) => {
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableHighlight
-        onPressIn={clock.dimmerPress}
-        onPressOut={clock.endPress}
+        onPressIn={actions.dimmerPress}
+        onPressOut={actions.endPress}
       >
         <View>
           <Image
@@ -33,8 +26,8 @@ export const Controls = (props: ControlsType) => {
       </TouchableHighlight>
 
       <TouchableHighlight
-        onPressIn={clock.brighterPress}
-        onPressOut={clock.endPress}
+        onPressIn={actions.brighterPress}
+        onPressOut={actions.endPress}
       >
         <View>
           <Image
@@ -44,7 +37,7 @@ export const Controls = (props: ControlsType) => {
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={clock.showColorClick}>
+      <TouchableHighlight onPress={actions.showColorClick}>
         <View>
           <Image
             style={control_style}
@@ -53,7 +46,7 @@ export const Controls = (props: ControlsType) => {
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={clock.showSecondsClick}>
+      <TouchableHighlight onPress={actions.showSecondsClick}>
         <View>
           <Image
             style={control_style}
@@ -62,7 +55,7 @@ export const Controls = (props: ControlsType) => {
         </View>
       </TouchableHighlight>
 
-      <TouchableHighlight onPress={clock.showDateClick}>
+      <TouchableHighlight onPress={actions.showDateClick}>
         <View>
           <Image
             style={control_style}
